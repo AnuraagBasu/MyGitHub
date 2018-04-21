@@ -7,15 +7,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "web-bundle": "webpack --config app/web/config/webpack/prod.config.js --progress --colors",
     "web-dev-bundle": "webpack --config app/web/config/webpack/dev.config.js --progress --colors",
-    "web-dev":
-      "webpack-dev-server --content-base app/web/ --config app/web/config/webpack/dev.config.js --port 3002 --host 0.0.0.0 --inline --colors",
+    "web-dev": "webpack-dev-server --content-base app/web/ --config app/web/config/webpack/dev.config.js --port 3002 --host 0.0.0.0 --inline --colors",
     "web-prod": "npm run web-bundle; node server/index.js"
   },
-  "keywords": ["react", "redux", "recompose", "redux-thunk", "github"],
+  "keywords": [
+    "react",
+    "redux",
+    "recompose",
+    "redux-thunk",
+    "github"
+  ],
   "author": "Anuraag Basu",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
