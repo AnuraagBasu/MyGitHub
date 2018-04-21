@@ -1,0 +1,9 @@
+@import '../../styles/variables.scss';
+.repo-list-container {
+  .repo-item-container {
+    margin-bottom: 8px;
+    @media screen and (min-width: $minTabletWidth) {
+      margin-bottom: 12px;
+    }
+  }
+}
