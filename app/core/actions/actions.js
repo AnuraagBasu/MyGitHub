@@ -9,6 +9,13 @@ const setUserDetails = (userDetails) => {
   };
 };
 
+const setUserRepos = (repos) => {
+  return {
+    type: types.SET_USER_REPOS,
+    repos,
+  };
+};
+
 const markFetchInProgress = () => {
   return {
     type: types.FETCH_IN_PROGRESS,
@@ -44,6 +51,24 @@ const getUserDetails = () => (dispatch) => {
     });
 };
 
+const getUserRepos = () => (dispatch) => {
+  dispatch(markFetchInProgress());
+
+  // TODO: change to use auth API
+  // TODO: make enms for URLs
+  makeRequest('https://api.github.com/users/chriscoyier/repos')
+    .then((resp) => {
+      dispatch(setUserRepos(Utils.getCleanRepos(resp)));
+
+      dispatch(markFetchResponded());
+    })
+    .catch((err) => {
+      console.error('error in fetching user details: ', err);
+      dispatch(markFetchRespondedWithErr());
+    });
+};
+
 export default {
   getUserDetails,
+  getUserRepos,
 };

@@ -8,6 +8,7 @@ const initialState = {
   email: '',
   repoCount: 0,
   isLoading: false,
+  repos: [],
 };
 
 const name = (state = initialState.name, action) => {
@@ -86,6 +87,16 @@ const isLoading = (state = initialState.isLoading, action) => {
   }
 };
 
+const repos = (state = initialState.repos, action) => {
+  switch (action.type) {
+    case types.SET_USER_REPOS:
+      return action.repos;
+
+    default:
+      return state;
+  }
+};
+
 export default {
   name,
   handle,
@@ -94,4 +105,5 @@ export default {
   email,
   repoCount,
   isLoading,
+  repos,
 };

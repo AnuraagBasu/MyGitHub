@@ -9,6 +9,22 @@ const getCleanUserDetails = (details) => {
   };
 };
 
+const getCleanRepos = (repos) => {
+  return repos.map((repo) => {
+    return {
+      id: repo.id,
+      name: repo.name,
+      url: repo.url,
+      desc: repo.description,
+      language: repo.language,
+      watchCount: repo.watchers_count,
+      forksCount: repo.forks_count,
+      starsCount: repo.stargazers_count,
+    };
+  });
+};
+
 export default {
   getCleanUserDetails,
+  getCleanRepos,
 };
