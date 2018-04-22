@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { compose, withProps, lifecycle } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 
 import UserDetail from '../../components/UserDetail';
 
@@ -22,9 +22,10 @@ const mapStateToProps = (state) => {
     name: state.name,
     handle: state.handle,
     bio: state.bio,
-    location: state.location,
+    userLocation: state.userLocation,
     email: state.email,
     repoCount: state.repoCount,
+    gistsCount: state.gistsCount,
   };
 };
 
@@ -32,4 +33,6 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(ActionCreators, dispatch);
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), getUserDetailOnMount)(UserDetailPage);
+const enhance = compose(connect(mapStateToProps, mapDispatchToProps), getUserDetailOnMount);
+
+export default enhance(UserDetailPage);

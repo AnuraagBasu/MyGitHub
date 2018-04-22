@@ -22,27 +22,41 @@ TextWithIcon.defaultProps = {
   className: 'wrapper',
 };
 
+const Stat = (props) => {
+  return (
+    <div className="stat">
+      <div className="count">{props.count}</div>
+      <div className="label">{props.label}</div>
+    </div>
+  );
+};
+
+Stat.propTypes = {
+  count: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
+};
+
 const UserDetail = (props) => {
   return (
     <div className="user-container">
-      <div className="cover">
-        <div className="pic" />
+      <div className="basic-info-section section">
         <div className="name">{props.name}</div>
-        <div className="handle">{props.handle}</div>
-        <span className="repo-count">{`${props.repoCount} Repos`}</span>
+        {props.bio ? <div className="bio">{props.bio}</div> : null}
       </div>
 
-      {props.bio ? (
-        <div className="bio section">
-          <div>About Me</div>
-          <div>{props.bio}</div>
+      <div className="stats-section section">
+        <div className="section-header">Stats</div>
+
+        <div className="follow-stats-wrapper">
+          <Stat count={props.gistsCount} label="Gists" />
+          <Stat count={props.repoCount} label="Repos" />
         </div>
-      ) : null}
+      </div>
 
-      <div className="more-info section">
-        <div>More Info</div>
+      <div className="more-info-section section">
+        <div className="section-header">More Info</div>
 
-        <TextWithIcon className="location" iconName="map-marker" text={props.location} />
+        <TextWithIcon className="location" iconName="map-marker" text={props.userLocation} />
 
         {props.email ? <TextWithIcon className="email" iconName="envelope" text={props.email} /> : null}
       </div>
@@ -52,11 +66,11 @@ const UserDetail = (props) => {
 
 UserDetail.propTypes = {
   name: PropTypes.string.isRequired,
-  handle: PropTypes.string.isRequired,
   bio: PropTypes.string,
-  location: PropTypes.string.isRequired,
+  userLocation: PropTypes.string.isRequired,
   email: PropTypes.string,
   repoCount: PropTypes.number.isRequired,
+  gistsCount: PropTypes.number.isRequired,
 };
 
 UserDetail.defaultProps = {

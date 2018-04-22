@@ -2,10 +2,12 @@ const getCleanUserDetails = (details) => {
   return {
     name: details.name,
     handle: details.login,
+    pic: details.avatar_url,
     bio: details.bio,
-    location: details.location,
+    userLocation: details.location,
     email: details.email,
-    repoCount: details.public_repos,
+    repoCount: details.public_repos + details.total_private_repos,
+    gistsCount: details.public_gists + details.private_gists,
   };
 };
 

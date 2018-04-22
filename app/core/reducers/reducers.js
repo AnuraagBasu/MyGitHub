@@ -4,11 +4,13 @@ const initialState = {
   name: '',
   handle: '',
   bio: '',
-  location: '',
+  userLocation: '',
   email: '',
   repoCount: 0,
+  gistsCount: 0,
   isLoading: false,
   repos: [],
+  accessToken: null,
 };
 
 const name = (state = initialState.name, action) => {
@@ -41,10 +43,10 @@ const bio = (state = initialState.bio, action) => {
   }
 };
 
-const location = (state = initialState.location, action) => {
+const userLocation = (state = initialState.userLocation, action) => {
   switch (action.type) {
     case types.SET_USER_DETAILS:
-      return action.userDetails.location;
+      return action.userDetails.userLocation;
 
     default:
       return state;
@@ -65,6 +67,16 @@ const repoCount = (state = initialState.repoCount, action) => {
   switch (action.type) {
     case types.SET_USER_DETAILS:
       return action.userDetails.repoCount;
+
+    default:
+      return state;
+  }
+};
+
+const gistsCount = (state = initialState.repoCount, action) => {
+  switch (action.type) {
+    case types.SET_USER_DETAILS:
+      return action.userDetails.gistsCount;
 
     default:
       return state;
@@ -97,13 +109,25 @@ const repos = (state = initialState.repos, action) => {
   }
 };
 
+const accessToken = (state = initialState.accessToken, action) => {
+  switch (action.type) {
+    case types.SET_USER_ACCESS_TOKEN:
+      return action.accessToken;
+
+    default:
+      return state;
+  }
+};
+
 export default {
   name,
   handle,
   bio,
-  location,
+  userLocation,
   email,
   repoCount,
+  gistsCount,
   isLoading,
   repos,
+  accessToken,
 };
