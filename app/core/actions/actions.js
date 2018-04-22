@@ -1,6 +1,7 @@
 import types from './types';
-import { makeRequest } from '../lib/request';
+import request from '../lib/request';
 import Utils from '../lib/utils';
+import URLs from '../config/urls';
 
 const setUserDetails = (userDetails) => {
   return {
@@ -13,6 +14,13 @@ const setUserRepos = (repos) => {
   return {
     type: types.SET_USER_REPOS,
     repos,
+  };
+};
+
+const setUserAccessToken = (accessToken) => {
+  return {
+    type: types.SET_USER_ACCESS_TOKEN,
+    accessToken,
   };
 };
 
@@ -34,12 +42,11 @@ const markFetchRespondedWithErr = () => {
   };
 };
 
-const getUserDetails = () => (dispatch) => {
+const getUserDetails = () => (dispatch, getState) => {
   dispatch(markFetchInProgress());
 
-  // TODO: change to use auth API
-  // TODO: make enms for URLs
-  makeRequest('https://api.github.com/users/chriscoyier')
+  request
+    .get(URLs.authenticatedUser.details(getState().accessToken))
     .then((resp) => {
       dispatch(setUserDetails(Utils.getCleanUserDetails(resp)));
 
@@ -51,12 +58,11 @@ const getUserDetails = () => (dispatch) => {
     });
 };
 
-const getUserRepos = () => (dispatch) => {
+const getUserRepos = () => (dispatch, getState) => {
   dispatch(markFetchInProgress());
 
-  // TODO: change to use auth API
-  // TODO: make enms for URLs
-  makeRequest('https://api.github.com/users/chriscoyier/repos')
+  request
+    .get(URLs.authenticatedUser.repos(getState().accessToken))
     .then((resp) => {
       dispatch(setUserRepos(Utils.getCleanRepos(resp)));
 
@@ -68,7 +74,25 @@ const getUserRepos = () => (dispatch) => {
     });
 };
 
+const getUserAccessToken = (authCode) => {
+  return (dispatch) => {
+    request
+      .post(URLs.getAccessToken(authCode))
+      .then((resp) => {
+        if (resp.error) {
+          throw new Error(resp.error);
+        } else {
+          dispatch(setUserAccessToken(resp.access_token));
+        }
+      })
+      .catch((err) => {
+        console.error('error in fetching user access token: ', err);
+      });
+  };
+};
+
 export default {
   getUserDetails,
   getUserRepos,
+  getUserAccessToken,
 };

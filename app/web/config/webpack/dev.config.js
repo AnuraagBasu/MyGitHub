@@ -6,9 +6,12 @@ module.exports = {
   entry: ['babel-polyfill', path.join(__dirname, '../../../../index.web')],
   mode: 'development',
   output: {
-    path: path.join(__dirname, '../'),
+    path: path.join(__dirname, '../../'),
     filename: 'bundle.js',
     publicPath: '/',
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   module: {
     rules: [
