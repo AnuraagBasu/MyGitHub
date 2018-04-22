@@ -39,12 +39,12 @@ Stat.propTypes = {
 const UserDetail = (props) => {
   return (
     <div className="user-container">
-      <div className="basic-info-section section">
+      <div className="basic-info-section section card animated fadeInUp anim-300-duration">
         <div className="name">{props.name}</div>
         {props.bio ? <div className="bio">{props.bio}</div> : null}
       </div>
 
-      <div className="stats-section section">
+      <div className="stats-section section card animated fadeInUp anim-300-duration">
         <div className="section-header">Stats</div>
 
         <div className="follow-stats-wrapper">
@@ -53,7 +53,7 @@ const UserDetail = (props) => {
         </div>
       </div>
 
-      <div className="more-info-section section">
+      <div className="more-info-section section card animated fadeInUp anim-300-duration">
         <div className="section-header">More Info</div>
 
         <TextWithIcon className="location" iconName="map-marker" text={props.userLocation} />

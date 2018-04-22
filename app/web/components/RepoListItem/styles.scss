@@ -1,7 +1,5 @@
 @import '../../styles/variables.scss';
 .repo-item-container {
-    max-width: 450px;
-    margin: 0 auto;
     background-color: #fff;
     padding: 8px;
     @media screen and (min-width: $minTabletWidth) {

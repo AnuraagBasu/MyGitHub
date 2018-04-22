@@ -7,7 +7,7 @@ import Styles from './styles.scss'; // eslint-disable-line no-unused-vars
 
 const RepoListItem = (props) => {
   return (
-    <div className="repo-item-container">
+    <div className="repo-item-container card animated fadeInUp anim-300-duration">
       <div className="info">
         <div className="name">
           <a href={props.url} target="_blank">
