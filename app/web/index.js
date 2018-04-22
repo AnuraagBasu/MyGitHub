@@ -1,14 +1,13 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { BrowserRouter, Route, withRouter } from 'react-router-dom';
 import { compose, lifecycle } from 'recompose';
-import { connect } from 'react-redux';
 
 import store from '../core/store';
 
 import LoginPage from './containers/LoginPage';
 import LoginCallbackPage from './containers/LoginCallbackPage';
-import UserPage from './containers/UserPage';
+import AuthenticatedPage from './containers/AuthenticatedPage';
 
 import Styles from './styles/base.scss'; // eslint-disable-line no-unused-vars
 
@@ -25,7 +24,7 @@ const Routes = () => {
     <div>
       <Route exact path="/login" component={LoginPage} />
       <Route path="/login/callback" component={LoginCallbackPage} />
-      <Route path="/user" component={UserPage} />
+      <Route path="/user" component={AuthenticatedPage} />
     </div>
   );
 };

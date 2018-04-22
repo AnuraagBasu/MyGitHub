@@ -2,7 +2,7 @@ import React from 'react';
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import UserPageTopSection from '../../components/UserPageTopSection';
@@ -15,7 +15,10 @@ import Styles from './styles.scss'; // eslint-disable-line no-unused-vars
 
 const getUserDetailOnMount = lifecycle({
   componentDidMount() {
-    this.props.getUserDetails();
+    if (this.props.accessToken) {
+      // user is logged in
+      this.props.getUserDetails();
+    }
   },
 });
 
@@ -56,6 +59,7 @@ const mapStateToProps = (state) => {
     handle: state.handle,
     repoCount: state.repoCount,
     gistsCount: state.gistsCount,
+    accessToken: state.accessToken,
   };
 };
 
@@ -63,6 +67,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(ActionCreators, dispatch);
 };
 
-const enhance = compose(connect(mapStateToProps, mapDispatchToProps), getUserDetailOnMount);
+const mapStoreToProps = connect(mapStateToProps, mapDispatchToProps);
+
+const enhance = compose(withRouter, mapStoreToProps, getUserDetailOnMount);
 
 export default enhance(UserPage);
