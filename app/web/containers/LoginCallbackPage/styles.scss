@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+.callback-page {
+    height: 100vh;
+    background-color: #3f4449;
+    padding: 16px;
+    text-align: center;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    @media screen and (min-width: $minTabletWidth) {
+        font-size: 18px;
+    }
+    .pulse-loader {
+        margin-top: 120px;
+        margin-bottom: 12px;
+    }
+}
