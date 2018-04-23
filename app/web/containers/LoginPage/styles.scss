@@ -1,28 +1,35 @@
 .login-page {
-  height: 100vh;
-  background-color: #3f4449;
-  padding: 16px;
-  text-align: center;
-  & > div:first-child {
-    margin-bottom: 24px;
-    margin-top: 120px;
-    font-size: 24px;
-    color: #fff;
-    text-transform: capitalize;
-  }
-  .login-btn {
-    cursor: pointer;
-    outline: none;
-    padding: 8px;
-    border-radius: 4px;
-    min-height: 50px;
-    font-size: 20px;
-    background-color: transparent;
-    color: #fff;
-    transition: all 0.3s ease;
-    &:hover {
-      background-color: #fff;
-      color: #3f4449;
+    height: 100vh;
+    background-color: #3f4449;
+    padding: 16px;
+    text-align: center;
+    &>div:first-child {
+        margin-bottom: 24px;
+        margin-top: 120px;
+        font-size: 24px;
+        color: #fff;
+        text-transform: capitalize;
     }
-  }
+    .login-btn {
+        cursor: pointer;
+        outline: none;
+        border: 2px solid #fff;
+        padding: 8px;
+        border-radius: 4px;
+        min-height: 50px;
+        font-size: 20px;
+        background-color: transparent;
+        color: #fff;
+        transition: all 0.3s ease;
+        &:hover {
+            background-color: #fff;
+            color: #3f4449;
+        }
+    }
+    .login-notif {
+        width: 240px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
 }

@@ -21,12 +21,12 @@ const changeRouteWhenAuthenticated = lifecycle({
 
 const Routes = () => {
   return (
-    <Switch>
+    <div>
       <Route exact path="/" component={LoginPage} />
       <Route exact path="/login" component={LoginPage} />
       <Route path="/login/callback" component={LoginCallbackPage} />
       <Route path="/user" component={AuthenticatedPage} />
-    </Switch>
+    </div>
   );
 };
 
