@@ -14,7 +14,8 @@ const getReposOnMount = lifecycle({
 
 const mapStateToProps = (state) => {
   return {
-    repos: state.repos,
+    repos: state.repos.items,
+    isLoading: state.repos.isLoading,
   };
 };
 

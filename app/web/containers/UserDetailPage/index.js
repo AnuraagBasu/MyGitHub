@@ -10,12 +10,12 @@ const UserDetailPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    name: state.name,
-    bio: state.bio,
-    userLocation: state.userLocation,
-    email: state.email,
-    repoCount: state.repoCount,
-    gistsCount: state.gistsCount,
+    name: state.user.name,
+    bio: state.user.bio,
+    userLocation: state.user.userLocation,
+    email: state.user.email,
+    repoCount: state.user.repoCount,
+    gistsCount: state.user.gistsCount,
   };
 };
 

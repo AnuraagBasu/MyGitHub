@@ -2,7 +2,7 @@ const getCleanUserDetails = (details) => {
   return {
     name: details.name,
     handle: details.login,
-    pic: details.avatar_url,
+    avatar: details.avatar_url,
     bio: details.bio,
     userLocation: details.location,
     email: details.email,

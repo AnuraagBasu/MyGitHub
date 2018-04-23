@@ -14,7 +14,7 @@ const authenticateOnMount = lifecycle({
 
 const mappedStateToProps = connect((state) => {
   return {
-    accessToken: state.accessToken,
+    accessToken: state.user.accessToken,
   };
 });
 

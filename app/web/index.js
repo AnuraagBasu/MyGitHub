@@ -31,7 +31,7 @@ const Routes = () => {
 
 const mapStateToRouteProps = (state) => {
   return {
-    accessToken: state.accessToken,
+    accessToken: state.user.accessToken,
   };
 };
 
