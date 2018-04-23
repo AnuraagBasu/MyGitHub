@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
-import reducers from './reducers';
+import UserReducer from './user';
+import ReposReducer from './repos';
 
-export default combineReducers(Object.assign({}, reducers));
+export default combineReducers(Object.assign({}, UserReducer, ReposReducer));
