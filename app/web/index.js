@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider, connect } from 'react-redux';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
 import { compose, lifecycle } from 'recompose';
 
 import store from '../core/store';
@@ -21,11 +21,12 @@ const changeRouteWhenAuthenticated = lifecycle({
 
 const Routes = () => {
   return (
-    <div>
+    <Switch>
+      <Route exact path="/" component={LoginPage} />
       <Route exact path="/login" component={LoginPage} />
       <Route path="/login/callback" component={LoginCallbackPage} />
       <Route path="/user" component={AuthenticatedPage} />
-    </div>
+    </Switch>
   );
 };
 

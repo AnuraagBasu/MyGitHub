@@ -2,9 +2,6 @@ import qs from 'qs';
 
 import Constants from '../config/constants';
 
-const authBaseURL = 'https://github.com/';
-const apiBaseURL = 'https://api.github.com/';
-
 const login = () => {
   const queryString = qs.stringify({
     client_id: Constants.gitHubClientId,
@@ -12,7 +9,7 @@ const login = () => {
     redirect_uri: `${window.location.origin}/login/callback`, // eslint-disable-line no-undef
   });
 
-  return `${authBaseURL}login/oauth/authorize?${queryString}`;
+  return `${Constants.authBaseURL}login/oauth/authorize?${queryString}`;
 };
 
 const getAccessToken = (authCode) => {
@@ -22,7 +19,7 @@ const getAccessToken = (authCode) => {
     code: authCode,
   });
 
-  return `${authBaseURL}login/oauth/access_token?${queryString}`;
+  return `${Constants.apiBaseURL}login/oauth/access_token?${queryString}`;
 };
 
 const authenticatedUser = {
@@ -31,7 +28,7 @@ const authenticatedUser = {
       access_token: accessToken,
     });
 
-    return `${apiBaseURL}user?${queryString}`;
+    return `${Constants.apiBaseURL}user?${queryString}`;
   },
 
   repos: (accessToken, pageNumber) => {
@@ -41,7 +38,7 @@ const authenticatedUser = {
       per_page: Constants.repoListPageSize,
     });
 
-    return `${apiBaseURL}user/repos?${queryString}`;
+    return `${Constants.apiBaseURL}user/repos?${queryString}`;
   },
 };
 
