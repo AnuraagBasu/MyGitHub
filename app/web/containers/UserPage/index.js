@@ -31,7 +31,6 @@ const handlers = withHandlers({
       const scrollTarget = event.target;
 
       if (scrollTarget.scrollTop + scrollTarget.offsetHeight >= scrollTarget.scrollHeight * 0.8) {
-        console.log('fetch more now');
         props.getUserRepos();
       }
     };
