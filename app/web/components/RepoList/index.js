@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import PulseLoader from '../PulseLoader';
 import RepoListItem from '../RepoListItem';
 
 import Styles from './styles.scss'; // eslint-disable-line no-unused-vars
 
 const RepoList = (props) => {
   return (
-    <div className="repo-list-container">
+    <div className={props.repos.length ? 'repo-list-container' : 'repo-list-container no-items'}>
       {props.repos.map((repo) => {
         return <RepoListItem key={`repo_${repo.id}`} {...repo} />;
       })}
+
+      {props.isLoading ? (
+        <div className="loader">
+          <PulseLoader />
+        </div>
+      ) : null}
     </div>
   );
 };
@@ -27,6 +34,11 @@ RepoList.propTypes = {
       starsCount: PropTypes.number,
     }),
   ).isRequired,
+  isLoading: PropTypes.bool,
+};
+
+RepoList.defaultProps = {
+  isLoading: false,
 };
 
 export default RepoList;

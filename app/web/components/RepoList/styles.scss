@@ -1,9 +1,32 @@
 @import '../../styles/variables.scss';
 .repo-list-container {
+  position: relative;
   .repo-item-container {
     margin-bottom: 8px;
     @media screen and (min-width: $minTabletWidth) {
       margin-bottom: 12px;
+    }
+  }
+  .loader {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  &.no-items {
+    min-height: 300px;
+    .loader {
+      align-items: center;
+      background-color: transparent;
+      .pulse-loader {
+        div {
+          background-color: #444;
+        }
+      }
     }
   }
 }

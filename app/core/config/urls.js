@@ -34,9 +34,11 @@ const authenticatedUser = {
     return `${apiBaseURL}user?${queryString}`;
   },
 
-  repos: (accessToken) => {
+  repos: (accessToken, pageNumber) => {
     const queryString = qs.stringify({
       access_token: accessToken,
+      page: pageNumber,
+      per_page: Constants.repoListPageSize,
     });
 
     return `${apiBaseURL}user/repos?${queryString}`;

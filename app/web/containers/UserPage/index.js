@@ -1,5 +1,5 @@
 import React from 'react';
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route, NavLink, withRouter } from 'react-router-dom';
@@ -16,26 +16,40 @@ import Styles from './styles.scss'; // eslint-disable-line no-unused-vars
 const getUserDetailOnMount = lifecycle({
   componentDidMount() {
     if (this.props.accessToken) {
-      // user is logged in
       this.props.getUserDetails();
     }
   },
 });
 
+const handlers = withHandlers({
+  handleScroll: (props) => {
+    return (event) => {
+      if (props.reposLoading || props.hasAllRepos) {
+        return;
+      }
+
+      const scrollTarget = event.target;
+
+      if (scrollTarget.scrollTop + scrollTarget.offsetHeight >= scrollTarget.scrollHeight * 0.8) {
+        console.log('fetch more now');
+        props.getUserRepos();
+      }
+    };
+  },
+});
+
 const UserPage = (props) => {
   return (
-    <div className="page user-page">
-      <div className="cover-section">
-        <UserPageTopSection pic={props.avatar} handle={props.handle} />
-        <div className="tabs">
-          <NavLink exact to={`${props.match.url}`} activeClassName="active">
-            Info
-          </NavLink>
+    <div onScroll={props.handleScroll} className="page user-page">
+      <UserPageTopSection avatar={props.avatar} handle={props.handle} />
+      <div className="tabs">
+        <NavLink exact to={`${props.match.url}`} activeClassName="active">
+          Info
+        </NavLink>
 
-          <NavLink to={`${props.match.url}/repo`} activeClassName="active">
-            Repos
-          </NavLink>
-        </div>
+        <NavLink to={`${props.match.url}/repo`} activeClassName="active">
+          Repos
+        </NavLink>
       </div>
 
       <div className="content-section">
@@ -55,11 +69,14 @@ UserPage.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    avatar: state.avatar,
-    handle: state.handle,
-    repoCount: state.repoCount,
-    gistsCount: state.gistsCount,
-    accessToken: state.accessToken,
+    avatar: state.user.avatar,
+    handle: state.user.handle,
+    repoCount: state.user.repoCount,
+    gistsCount: state.user.gistsCount,
+    accessToken: state.user.accessToken,
+    userDetailsLoading: state.user.isLoading,
+    reposLoading: state.repos.isLoading,
+    hasAllRepos: state.repos.hasAll,
   };
 };
 
@@ -69,6 +86,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStoreToProps = connect(mapStateToProps, mapDispatchToProps);
 
-const enhance = compose(withRouter, mapStoreToProps, getUserDetailOnMount);
+const enhance = compose(withRouter, mapStoreToProps, getUserDetailOnMount, handlers);
 
 export default enhance(UserPage);
