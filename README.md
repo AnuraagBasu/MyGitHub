@@ -1,6 +1,9 @@
 # MyGitHub
 a react/redux app which lets user to access their GitHub repos
 
+## Demo
+[here](https://my-git-hub.herokuapp.com/)
+
 ## Steps to Run
 * Clone the project
 * run _**npm install**_
