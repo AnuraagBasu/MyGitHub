@@ -16,7 +16,7 @@ const getCleanRepos = (repos) => {
     return {
       id: repo.id,
       name: repo.name,
-      url: repo.url,
+      url: repo.html_url,
       desc: repo.description,
       language: repo.language,
       watchCount: repo.watchers_count,
