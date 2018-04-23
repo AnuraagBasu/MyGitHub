@@ -8,6 +8,7 @@ import {
   markFetchRespondedWithErr,
   setUserDetails,
   setUserAccessToken,
+  markAuthenticationFailed,
 } from './actions';
 
 const getUserDetails = () => (dispatch, getState) => {
@@ -32,13 +33,16 @@ const getUserAccessToken = (authCode) => {
       .post(URLs.getAccessToken(authCode))
       .then((resp) => {
         if (resp.error) {
-          throw new Error(resp.error);
+          const error = new Error(resp.error_description);
+          error.code = resp.error;
+          throw error;
         } else {
           dispatch(setUserAccessToken(resp.access_token));
         }
       })
       .catch((err) => {
         console.error('error in fetching user access token: ', err);
+        dispatch(markAuthenticationFailed(err.code));
       });
   };
 };

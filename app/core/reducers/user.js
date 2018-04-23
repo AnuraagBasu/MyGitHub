@@ -12,6 +12,7 @@ const initialState = {
   isLoading: false,
   repos: [],
   accessToken: null,
+  authError: null,
 };
 
 const user = (state = initialState, action) => {
@@ -41,6 +42,9 @@ const user = (state = initialState, action) => {
       return Object.assign({}, state, {
         isLoading: false,
       });
+
+    case types.AUTHENTICATION_FAILED:
+      return Object.assign({}, state, { authError: action.error });
 
     default:
       return state;

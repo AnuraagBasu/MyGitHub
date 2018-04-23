@@ -21,6 +21,13 @@ export const setUserAccessToken = (accessToken) => {
   };
 };
 
+export const markAuthenticationFailed = (error) => {
+  return {
+    type: types.AUTHENTICATION_FAILED,
+    error,
+  };
+};
+
 export const markFetchInProgress = () => {
   return {
     type: types.FETCH_IN_PROGRESS,
